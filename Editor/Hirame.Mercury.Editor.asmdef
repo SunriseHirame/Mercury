@@ -1,0 +1,17 @@
+{
+    "name": "Hirame.Mercury.Editor",
+    "references": [
+        "GUID:9ea50ea292bb3ff4d97a99ed73c87c81"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}

@@ -1,0 +1,17 @@
+{
+  "name": "com.hirame.mercury",
+  "version": "0.0.0",
+  "displayName": "Hirame Mercury",
+  "description": "A Unity Editor extension prividing cool Hierarchy extensions and editing features.",
+  "unity": "2019.1",
+  "unityRelease": "0b5",
+  "dependencies": {
+ },
+ "keywords": [
+  ],
+  "author": {
+    "name": "Bernhard Miettinen",
+    "email": "bernhard.miettinen@gmail.com",
+    "url": "https://www.github.com/sunrisehirame"
+  } 
+}
