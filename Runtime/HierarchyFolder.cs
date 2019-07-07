@@ -17,7 +17,10 @@ namespace Hirame.Mercury
         {
             gameObject.hideFlags = HideFlags.NotEditable;
             transform.hideFlags = HideFlags.NotEditable | HideFlags.HideInInspector;
-            this.hideFlags = HideFlags.None;
+            
+            hideFlags = HideFlags.None;
+            if (!gameObject.CompareTag ("EditorOnly"))
+                gameObject.tag = "EditorOnly";
         }
 
         private bool TransformHasDefaultValues ()
