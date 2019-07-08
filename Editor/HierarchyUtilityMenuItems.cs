@@ -57,6 +57,8 @@ namespace Hirame.Mercury.Editor
             if (gameObject == null)
                 return;
 
+            Undo.RegisterFullObjectHierarchyUndo (gameObject, "Set Pivot");
+
             var childMeshFilters = gameObject.GetComponentsInChildren<MeshFilter> ();
             var offset = HierarchyUtility.GetPivotOffset (childMeshFilters, pivot);
 
