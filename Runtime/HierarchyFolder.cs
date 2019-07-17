@@ -5,6 +5,8 @@ namespace Hirame.Mercury
     [ExecuteAlways]
     public sealed class HierarchyFolder : MonoBehaviour
     {
+        [SerializeField] private string customMessage;
+        
         private void Update ()
         {
             if (!transform.hasChanged || TransformHasDefaultValues ())
@@ -15,10 +17,6 @@ namespace Hirame.Mercury
 
         private void OnValidate ()
         {
-            gameObject.hideFlags = HideFlags.NotEditable;
-            transform.hideFlags = HideFlags.NotEditable | HideFlags.HideInInspector;
-            
-            hideFlags = HideFlags.None;
             if (!gameObject.CompareTag ("EditorOnly"))
                 gameObject.tag = "EditorOnly";
         }
@@ -51,6 +49,7 @@ namespace Hirame.Mercury
                 child.SetParent (t);   
             }
         }
+        
     }
 
 }

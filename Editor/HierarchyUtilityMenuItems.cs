@@ -6,46 +6,47 @@ namespace Hirame.Mercury.Editor
 {
     public class HierarchyUtilityMenuItems : MonoBehaviour
     {
-        private const int PivotMenuPriority = -10;
+        private const int PivotMenuPriority = -900;
+        private const string MenuRootName = "GameObject/Set Pivot";
 
 
-        [MenuItem ("GameObject/Pivot/Center", false, PivotMenuPriority)]
+        [MenuItem (MenuRootName + "/Center", false, PivotMenuPriority)]
         private static void SetPivotToCenter (MenuCommand command)
         {
             SetPivot (command, PivotPosition.Center);
         }
 
-        [MenuItem ("GameObject/Pivot/Bottom", false, PivotMenuPriority)]
+        [MenuItem (MenuRootName + "/Bottom", false, PivotMenuPriority)]
         private static void SetPivotToBottom (MenuCommand command)
         {
             SetPivot (command, PivotPosition.Bottom);
         }
 
-        [MenuItem ("GameObject/Pivot/Top", false, PivotMenuPriority)]
+        [MenuItem (MenuRootName + "/Top", false, PivotMenuPriority)]
         private static void SetPivotToTop (MenuCommand command)
         {
             SetPivot (command, PivotPosition.Top);
         }
 
-        [MenuItem ("GameObject/Pivot/Left", false, PivotMenuPriority)]
+        [MenuItem (MenuRootName + "/Left", false, PivotMenuPriority)]
         private static void SetPivotToLeft (MenuCommand command)
         {
             SetPivot (command, PivotPosition.Left);
         }
 
-        [MenuItem ("GameObject/Pivot/Right", false, PivotMenuPriority)]
+        [MenuItem (MenuRootName + "/Right", false, PivotMenuPriority)]
         private static void SetPivotToRight (MenuCommand command)
         {
             SetPivot (command, PivotPosition.Right);
         }
 
-        [MenuItem ("GameObject/Pivot/Back", false, PivotMenuPriority)]
+        [MenuItem (MenuRootName + "/Back", false, PivotMenuPriority)]
         private static void SetPivotToBack (MenuCommand command)
         {
             SetPivot (command, PivotPosition.Back);
         }
 
-        [MenuItem ("GameObject/Pivot/Front", false, PivotMenuPriority)]
+        [MenuItem (MenuRootName + "/Front", false, PivotMenuPriority)]
         private static void SetPivotToFront (MenuCommand command)
         {
             SetPivot (command, PivotPosition.Front);
