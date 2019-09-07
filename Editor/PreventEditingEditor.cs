@@ -56,7 +56,7 @@ namespace Hirame.Mercury.Editor
                     }                    break;
                 case PreventEditing.LockType.Prefab:
                     if (PrefabStageUtility.GetCurrentPrefabStage () != null
-                        && PrefabUtility.IsAnyPrefabInstanceRoot (lockEditing.gameObject))
+                        && IsRootPrefab (lockEditing))
                     {
                         LockComponents ();
                     }
