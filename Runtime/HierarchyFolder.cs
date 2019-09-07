@@ -5,20 +5,34 @@ namespace Hirame.Mercury
     [ExecuteAlways]
     public sealed class HierarchyFolder : MonoBehaviour
     {
+        [SerializeField] private bool includeInBuilds = true;
         [SerializeField] private string customMessage;
+
+        public bool IsIncludedInBuilds
+        {
+            get => includeInBuilds;
+            internal set => includeInBuilds = value;
+        }
         
+#if UNITY_EDITOR
         private void Update ()
         {
-            if (!transform.hasChanged || TransformHasDefaultValues ())
+            if (Application.isPlaying)
                 return;
             
+            if (!transform.hasChanged || TransformHasDefaultValues ())
+                return;
+
             ResetTransform ();
         }
+#endif
 
         private void OnValidate ()
         {
-            if (!gameObject.CompareTag ("EditorOnly"))
+            if (!includeInBuilds && !gameObject.CompareTag ("EditorOnly"))
                 gameObject.tag = "EditorOnly";
+            else if (gameObject.CompareTag ("EditorOnly"))
+                gameObject.tag = "Untagged";
         }
 
         private bool TransformHasDefaultValues ()
@@ -31,25 +45,23 @@ namespace Hirame.Mercury
 
         private void ResetTransform ()
         {
-            var t = transform;
-            var children = new Transform[t.childCount];
+            var ownTransform = transform;
+            var children = new Transform[ownTransform.childCount];
 
             for (var i = 0; i < children.Length; i++)
             {
                 children[i] = transform.GetChild (0);
             }
-            
-            t.DetachChildren ();
-            t.localPosition = Vector3.zero;
-            t.localRotation = Quaternion.identity;
-            t.localScale = Vector3.zero;
+
+            ownTransform.DetachChildren ();
+            ownTransform.localPosition = Vector3.zero;
+            ownTransform.localRotation = Quaternion.identity;
+            ownTransform.localScale = Vector3.zero;
 
             foreach (var child in children)
             {
-                child.SetParent (t);   
+                child.SetParent (ownTransform);
             }
         }
-        
     }
-
 }
