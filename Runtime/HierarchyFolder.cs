@@ -56,7 +56,7 @@ namespace Hirame.Mercury
             ownTransform.DetachChildren ();
             ownTransform.localPosition = Vector3.zero;
             ownTransform.localRotation = Quaternion.identity;
-            ownTransform.localScale = Vector3.zero;
+            ownTransform.localScale = Vector3.one;
 
             foreach (var child in children)
             {

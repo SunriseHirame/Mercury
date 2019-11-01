@@ -1,21 +1,66 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Hirame.Mercury
 {
     public static class HierarchyUtility
     {
-        public enum PivotPosition
+        public enum PivotPosition : int
         {
-            Center,
-            Top,
-            Bottom,
-            Left,
-            Right,
-            Front,
-            Back
+            Center = 0,
+            Top = 1,
+            Bottom = 2,
+            Left = 3,
+            Right = 4,
+            Front = 5,
+            Back = 6
         }
-        
 
+        private delegate void PivotDel (ref Vector3 offset, Vector3 extents);
+        
+        private static PivotDel[] offsetActions =
+        {
+            // Center
+            (ref Vector3 offset, Vector3 extents) => 
+            { },
+            // Top
+            (ref Vector3 offset, Vector3 extents) =>
+            {
+                if (offset.y > -extents.y)
+                    offset.y = -extents.y;
+            },
+            // Bottom
+            (ref Vector3 offset, Vector3 extents) =>
+            {
+                if (offset.y < extents.y)
+                    offset.y = extents.y;
+            },
+            // Left
+            (ref Vector3 offset, Vector3 extents) =>
+            {
+                if (offset.x < extents.x)
+                    offset.x = extents.x;
+            },
+            // Right
+            (ref Vector3 offset, Vector3 extents) =>
+            {
+                if (offset.x > -extents.x)
+                    offset.x = -extents.x;
+            },
+            // Front
+            (ref Vector3 offset, Vector3 extents) =>
+            {
+                if (offset.z > -extents.z)
+                    offset.z = -extents.z;
+            },
+            // Back
+            (ref Vector3 offset, Vector3 extents) =>
+            {
+                if (offset.z < extents.z)
+                    offset.z = extents.z;
+            },
+        };
+        
         public static Vector3 GetPivotOffset (MeshFilter[] meshFilters, PivotPosition pivotPosition)
         {
             var center = new Vector3 ();
@@ -31,7 +76,7 @@ namespace Hirame.Mercury
                 center += filterTransform.InverseTransformPoint (bounds.center);
 
                 if (pivotPosition != PivotPosition.Center)
-                    UpdateOffset (ref offset, in bounds, pivotPosition);
+                    offsetActions[(int) pivotPosition] (ref offset, bounds.extents);
             }
 
             if (pivotPosition == PivotPosition.Center && meshFilters.Length > 0)
@@ -47,39 +92,6 @@ namespace Hirame.Mercury
                 transform.GetChild (i).localPosition += offset;
             }
         }
-
-        private static void UpdateOffset (ref Vector3 offset, in Bounds bounds, PivotPosition pivot)
-        {
-            var extents = bounds.extents;
-            switch (pivot)
-            {
-                case PivotPosition.Center:
-                    break;
-                case PivotPosition.Left:
-                    if (offset.x < extents.x)
-                        offset.x = extents.x;
-                    break;
-                case PivotPosition.Right:
-                    if (offset.x > -extents.x)
-                        offset.x = -extents.x;
-                    break;
-                case PivotPosition.Top:
-                    if (offset.y > -extents.y)
-                        offset.y = -extents.y;
-                    break;
-                case PivotPosition.Bottom:
-                    if (offset.y < extents.y)
-                        offset.y = extents.y;
-                    break;
-                case PivotPosition.Front:
-                    if (offset.z > -extents.z)
-                        offset.z = -extents.z;
-                    break;
-                case PivotPosition.Back:
-                    if (offset.z < extents.z)
-                        offset.z = extents.z;
-                    break;
-            }
-        }
+        
     }
 }

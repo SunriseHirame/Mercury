@@ -4,7 +4,7 @@ using PivotPosition = Hirame.Mercury.HierarchyUtility.PivotPosition;
 
 namespace Hirame.Mercury.Editor
 {
-    public class HierarchyUtilityMenuItems : MonoBehaviour
+    public class PivotUtilityMenuItems : MonoBehaviour
     {
         private const int PivotMenuPriority = -900;
         private const string MenuRootName = "GameObject/Set Pivot";

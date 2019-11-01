@@ -78,6 +78,8 @@ namespace Hirame.Mercury.Editor
 
         private void OnDisable ()
         {
+            Tools.hidden = false;
+            
             if (folder == null)
                 return;
 

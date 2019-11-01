@@ -18,7 +18,7 @@ namespace Hirame.Mercury.Editor
         {
             if (!drawMap.TryGetValue (instanceId, out var customDrawing))
             {
-                var go = EditorUtility.InstanceIDToObject (instanceId) as GameObject;
+                var go = UnityEditor.EditorUtility.InstanceIDToObject (instanceId) as GameObject;
                 customDrawing = go && go.GetComponent<HierarchyFolder> ();
                 drawMap.Add (instanceId, customDrawing);
             }
