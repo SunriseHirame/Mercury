@@ -6,16 +6,23 @@ using UnityEditor;
 
 namespace Hirame.Mercury
 {
+    public enum GroupingMode { Center, Folder }
+    
     public static class TransformUtility
     {
-        public static Transform CreateGroup (Transform[] others, bool center)
+        public static Transform CreateGroup (Transform[] others, GroupingMode groupingMode)
         {
-            var parent = new GameObject ("New Group").transform;
+            var parentName = groupingMode == GroupingMode.Folder ? "New Folder" : "New Group";
+            var parent = new GameObject (parentName).transform;
+
+            if (groupingMode == GroupingMode.Folder)
+                parent.gameObject.AddComponent<HierarchyFolder> ();
+
 #if UNITY_EDITOR
             Undo.RegisterCreatedObjectUndo (parent.gameObject, "Create New Group Parent");
 #endif
 
-            if (center)
+            if (groupingMode == GroupingMode.Center)
             {
                 var centerPosition = GetCenterPosition (others);
                 parent.position = centerPosition;

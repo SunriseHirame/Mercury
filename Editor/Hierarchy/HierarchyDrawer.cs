@@ -26,7 +26,7 @@ namespace Hirame.Mercury.Editor
             if (!customDrawing)
                 return;
 
-            ColorStack.PushBackgroundColor (Color.green);
+            ColorStack.PushBackgroundColor (new Color (0.2f, 1, 0.2f, 0.5f));
             GUI.Box (rect, GUIContent.none);
             ColorStack.PopBackgroundColor ();
         }
