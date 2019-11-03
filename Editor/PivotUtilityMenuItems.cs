@@ -7,7 +7,7 @@ namespace Hirame.Mercury.Editor
     public class PivotUtilityMenuItems : MonoBehaviour
     {
         private const int PivotMenuPriority = -900;
-        private const string MenuRootName = "GameObject/Set Pivot";
+        private const string MenuRootName = "GameObject/Tools/Pivot";
 
 
         [MenuItem (MenuRootName + "/Center", false, PivotMenuPriority)]
